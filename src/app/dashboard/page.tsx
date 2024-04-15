@@ -1,9 +1,12 @@
 'use client'
 import Chart from '@/components/chart'
+import GeograficChart from '@/components/geografic_chart'
 import KPICard from '@/components/kpicard'
-import { Card } from '@tremor/react'
-
-const valueFormatter = (number: number) => Intl.NumberFormat('es-ES').format(number).toString()
+import RankingList from '@/components/ranking_list'
+import SettingNav from '@/components/settings_nav'
+import { valueFormatter } from '@/lib/utils'
+import { Card, DateRangePickerValue, TabGroup, TabPanel, TabPanels, Divider } from '@tremor/react'
+import { useState } from 'react'
 
 const visits = [
   {
@@ -362,7 +365,6 @@ const kpis = [
   {
     name: 'Average pageviews',
     value: '230',
-    change: '+6.1%',
     changeType: 'positive'
   },
   {
@@ -391,22 +393,127 @@ type TData = {
   }[]
 }[]
 
+const pages = [
+  {
+    name: '/home',
+    value: 2019
+  },
+  {
+    name: '/blocks',
+    value: 1053
+  },
+  {
+    name: '/components',
+    value: 997
+  },
+  {
+    name: '/docs/getting-started/installation',
+    value: 982
+  },
+  {
+    name: '/docs/components/button',
+    value: 782
+  },
+  {
+    name: '/docs/components/table',
+    value: 752
+  },
+  {
+    name: '/docs/components/area-chart',
+    value: 741
+  },
+  {
+    name: '/docs/components/badge',
+    value: 750
+  },
+  {
+    name: '/docs/components/bar-chart',
+    value: 750
+  },
+  {
+    name: '/docs/components/tabs',
+    value: 720
+  },
+  {
+    name: '/docs/components/tracker',
+    value: 723
+  }
+]
+
+const countrys = [
+  {
+    name: 'Argentina',
+    total: 6730,
+    share: '32.1%',
+    color: 'bg-cyan-500'
+  },
+  {
+    name: 'USA',
+    total: 4120,
+    share: '19.6%',
+    color: 'bg-blue-500'
+  },
+  {
+    name: 'Germany',
+    total: 3920,
+    share: '18.6%',
+    color: 'bg-indigo-500'
+  },
+  {
+    name: 'French',
+    total: 3210,
+    share: '15.3%',
+    color: 'bg-violet-500'
+  },
+  {
+    name: 'Uruguay',
+    total: 3010,
+    share: '14.3%',
+    color: 'bg-fuchsia-500'
+  }
+]
+
 export default function Dashboard() {
+  const [dateRange, setDateRange] = useState<DateRangePickerValue>({})
+
   return (
-    <Card className="flex min-h-screen flex-col items-center md:p-24">
-      <Card className="flex flex-col md:flex-row gap-5 ">
-        {kpis.map((kpi) => (
-          <KPICard key={kpi.name} name={kpi.name} value={kpi.value} change={kpi.change} changeType={kpi.changeType} />
-        ))}
+    <div className="container mx-auto md:my-20">
+      <Card className="flex flex-col items-center">
+        <TabGroup>
+          <div className="flex flex-col md:flex-row gap-5">
+            {kpis.map((kpi) => (
+              <KPICard
+                key={kpi.name}
+                name={kpi.name}
+                value={kpi.value}
+                change={kpi.change}
+                changeType={kpi.changeType}
+              />
+            ))}
+          </div>
+          <Divider />
+          <SettingNav tabs={data} dateValue={dateRange} onDatePick={setDateRange} />
+          <TabPanels className="mt-5">
+            {data.map((metric) => (
+              <TabPanel key={metric.name}>
+                <Card>
+                  <Chart
+                    data={metric.data}
+                    categories={metric.categories}
+                    colors={metric.colors}
+                    valueFormatter={valueFormatter}
+                  />
+                </Card>
+              </TabPanel>
+            ))}
+            <Divider />
+            <Card className="flex flex-col xl:flex-row gap-5 justify-between">
+              <RankingList title="Top Pages" metric="VISITS" items={pages} />
+              <GeograficChart data={countrys} />
+            </Card>
+          </TabPanels>
+        </TabGroup>
       </Card>
-      <Card>
-        <Chart
-          data={data[0].data}
-          categories={data[0].categories}
-          colors={data[0].colors}
-          valueFormatter={valueFormatter}
-        />
-      </Card>
-    </Card>
+    </div>
   )
 }
