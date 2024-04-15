@@ -1,18 +1,18 @@
 import { Button, Card, Divider, Title } from '@tremor/react'
 import Link from 'next/link'
 
-export default function Home() {
+export default function Contact() {
   return (
     <main className="container mx-auto my-20">
       <Card className="flex flex-col gap-5">
-        <Title>HomePage</Title>
+        <Title>Contact</Title>
         <h2 className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
           Testing buttons to track analytics
         </h2>
         <Divider />
         <div className="flex justify-around">
-          <Link href={'/contact'}>
-            <Button variant="secondary">Go to /contact</Button>
+          <Link href={'/'}>
+            <Button variant="secondary">Go to Home Page</Button>
           </Link>
 
           <Link href={'/pricing'}>
