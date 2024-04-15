@@ -18,8 +18,12 @@ export default function KPICard({ name, value, change, changeType }: KPICardProp
         </span>
         <span
           className={classNames(
-            changeType === 'positive' ? 'text-emerald-700 dark:text-emerald-500' : 'text-red-700 dark:text-red-500',
-            'text-tremor-default font-medium'
+            change
+              ? changeType === 'positive'
+                ? 'bg-emerald-100 text-emerald-800 ring-emerald-600/10 dark:bg-emerald-400/10 dark:text-emerald-500 dark:ring-emerald-400/20'
+                : 'bg-red-100 text-red-800 ring-red-600/10 dark:bg-red-400/10 dark:text-red-500 dark:ring-red-400/20'
+              : 'hidden',
+            'inline-flex items-center rounded-tremor-small px-2 py-1 text-tremor-label font-medium ring-1 ring-inset'
           )}
         >
           {change}
