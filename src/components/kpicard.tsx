@@ -1,5 +1,5 @@
 // 'use client';
-import { classNames } from '@/lib/utils'
+import { classNames } from '@/utils'
 import { Card } from '@tremor/react'
 
 interface KPICardProps {

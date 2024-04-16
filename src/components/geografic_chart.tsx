@@ -1,5 +1,5 @@
 // 'use client';
-import { classNames, valueFormatter } from '@/lib/utils'
+import { classNames, valueFormatter } from '@/utils'
 import { Card, DonutChart, List, ListItem } from '@tremor/react'
 
 interface GeograficChartProps {

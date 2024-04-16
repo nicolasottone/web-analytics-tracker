@@ -1,4 +1,4 @@
-import { valueFormatter } from '@/lib/utils'
+import { valueFormatter } from '@/utils'
 import { BarList, Card } from '@tremor/react'
 
 interface RankingListProps {

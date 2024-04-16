@@ -4,7 +4,7 @@ import GeograficChart from '@/components/geografic_chart'
 import KPICard from '@/components/kpicard'
 import RankingList from '@/components/ranking_list'
 import SettingNav from '@/components/settings_nav'
-import { valueFormatter } from '@/lib/utils'
+import { valueFormatter } from '@/utils'
 import { Card, DateRangePickerValue, TabGroup, TabPanel, TabPanels, Divider } from '@tremor/react'
 import { useState } from 'react'
 
