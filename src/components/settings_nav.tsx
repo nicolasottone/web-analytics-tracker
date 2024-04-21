@@ -1,4 +1,5 @@
 import { Card, Tab, TabList, DateRangePicker, DateRangePickerItem, DateRangePickerValue } from '@tremor/react'
+import { subDays } from 'date-fns'
 
 interface SettingNavProps {
   tabs: {
@@ -10,7 +11,7 @@ interface SettingNavProps {
 
 export default function SettingNav({ tabs, onDatePick, dateValue }: SettingNavProps) {
   const today = new Date()
-  const startTracking = new Date(2024, 3, 15)
+  const startTracking = new Date(2024, 2, 15)
 
   return (
     <Card className="flex flex-col md:flex-row items-stretch md:items-center gap-4 md:justify-between">
@@ -33,13 +34,13 @@ export default function SettingNav({ tabs, onDatePick, dateValue }: SettingNavPr
         maxDate={today}
         minDate={startTracking}
       >
-        <DateRangePickerItem key="today" value="today" from={today}>
+        <DateRangePickerItem key="today" value="today" from={today} to={today}>
           Today
         </DateRangePickerItem>
-        <DateRangePickerItem key="last week" value="last week" from={new Date(2023, 0, 1)}>
+        <DateRangePickerItem key="last week" value="last week" from={subDays(today, 6)} to={today}>
           Last Week
         </DateRangePickerItem>
-        <DateRangePickerItem key="last month" value="last month" from={new Date(2023, 0, 1)}>
+        <DateRangePickerItem key="last month" value="last month" from={subDays(today, 30)} to={today}>
           Last Month
         </DateRangePickerItem>
       </DateRangePicker>

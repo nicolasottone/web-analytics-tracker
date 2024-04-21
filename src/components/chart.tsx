@@ -1,5 +1,5 @@
 'use client'
-import { BarChart } from '@tremor/react'
+import { BarChart, Card } from '@tremor/react'
 
 interface ChartProps {
   data: any[]
@@ -10,7 +10,7 @@ interface ChartProps {
 
 const Chart = ({ data, categories, colors, valueFormatter }: ChartProps) => {
   return (
-    <>
+    <Card className="w-full h-full min-h-0 min-w-0">
       <BarChart
         data={data}
         index="date"
@@ -37,7 +37,7 @@ const Chart = ({ data, categories, colors, valueFormatter }: ChartProps) => {
         showAnimation
         animationDuration={100}
       />
-    </>
+    </Card>
   )
 }
 
