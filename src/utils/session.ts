@@ -15,15 +15,15 @@ class Session {
     return crypto.randomUUID()
   }
   async set(id: string) {
-    const key = `sessions:${id}`
+    const key = `session:${id}`
     await redis.setex(key, this.retention, {})
   }
   async check(id: string) {
-    const key = `sessions:${id}`
+    const key = `session:${id}`
     return await redis.exists(key)
   }
   async delete(id: string) {
-    const key = `sessions:${id}`
+    const key = `session:${id}`
     await redis.del(key)
   }
 }
