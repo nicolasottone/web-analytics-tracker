@@ -1,5 +1,6 @@
 import { redis } from '@/libs/redis'
 import { getDate } from '.'
+import { addDays, differenceInDays, format } from 'date-fns'
 
 type AnalyticsArgs = {
   retention?: number
@@ -40,6 +41,31 @@ class Analytics {
     const key = `analytics:${getDate()}`
 
     await redis.hincrby(key, JSON.stringify({ event: eventName }), 1)
+  }
+  async retrieve(day: Date) {
+    const key = `analytics:${format(day, 'dd/MM/yyyy')}`
+    return await redis.hgetall(key)
+  }
+  async retrieveDays(from: Date, to: Date) {
+    let promises: ReturnType<typeof this.retrieve>[] = []
+    let days: string[] = []
+    if (from !== to) {
+      const daysBetween = differenceInDays(to, from)
+      for (let i = 0; i <= daysBetween; i++) {
+        const day = addDays(from, i)
+        const promise = this.retrieve(day)
+        days.push(format(day, 'dd/MM/yy'))
+        promises.push(promise)
+      }
+    } else {
+      days.push(format(from, 'dd/MM/yy'))
+      promises.push(this.retrieve(from))
+    }
+    const result = await Promise.all(promises)
+    const formatedResult = result.map((dayData, i) => {
+      return { [days[i]]: dayData }
+    })
+    return formatedResult
   }
 }
 
