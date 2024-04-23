@@ -7,11 +7,18 @@ interface RankingListProps {
   color?: string
   items: {
     name: string
-    value: number
+    total: number
+    color?: string
   }[]
 }
 
 export default function RankingList({ title, metric, items, color }: RankingListProps) {
+  const data = items.map((item) => {
+    return {
+      name: item.name,
+      value: item.total
+    }
+  })
   return (
     <>
       <Card className="p-0 sm:mx-auto sm:max-w-3xl">
@@ -22,7 +29,7 @@ export default function RankingList({ title, metric, items, color }: RankingList
           </p>
         </div>
         <div className={`overflow-hidden p-6`}>
-          <BarList color={color ? color : 'blue'} data={items} valueFormatter={valueFormatter} showAnimation />
+          <BarList color={color ? color : 'blue'} data={data} valueFormatter={valueFormatter} showAnimation />
         </div>
       </Card>
     </>
