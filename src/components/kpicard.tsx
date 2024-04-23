@@ -6,7 +6,7 @@ interface KPICardProps {
   name: string
   value: string
   change?: string
-  changeType: 'negative' | 'positive' | string
+  changeType?: 'negative' | 'positive' | string
 }
 
 export default function KPICard({ name, value, change, changeType }: KPICardProps) {
