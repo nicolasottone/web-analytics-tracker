@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
       summary: visitorsCategories.map((category) => {
         return {
           name: category,
-          total: summary.events[category]
+          total: summary.visitors[category]
         }
       })
     }
