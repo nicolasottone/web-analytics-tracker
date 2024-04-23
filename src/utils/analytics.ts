@@ -46,26 +46,10 @@ class Analytics {
     const key = `analytics:${format(day, 'dd/MM/yyyy')}`
     return await redis.hgetall(key)
   }
-  async retrieveDays(from: Date, to: Date) {
+  async retrieveDays(days: Date[]) {
     let promises: ReturnType<typeof this.retrieve>[] = []
-    let days: string[] = []
-    if (from !== to) {
-      const daysBetween = differenceInDays(to, from)
-      for (let i = 0; i <= daysBetween; i++) {
-        const day = addDays(from, i)
-        const promise = this.retrieve(day)
-        days.push(format(day, 'dd/MM/yy'))
-        promises.push(promise)
-      }
-    } else {
-      days.push(format(from, 'dd/MM/yy'))
-      promises.push(this.retrieve(from))
-    }
-    const result = await Promise.all(promises)
-    const formatedResult = result.map((dayData, i) => {
-      return { [days[i]]: dayData }
-    })
-    return formatedResult
+    days.forEach((day) => promises.push(this.retrieve(day)))
+    return await Promise.all(promises)
   }
 }
 
