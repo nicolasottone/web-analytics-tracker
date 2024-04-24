@@ -31,11 +31,7 @@ class Analytics {
   async trackVisitor(geo: GeoInfo) {
     const key = `analytics:${getDate()}`
 
-    await redis.hincrby(key, JSON.stringify({ visits: 'unique' }), 1)
-
-    if (geo !== undefined && Object.keys(geo).length > 0) {
-      await redis.hincrby(key, JSON.stringify({ visitor: geo }), 0)
-    }
+    await redis.hincrby(key, JSON.stringify({ visits: geo?.country ? geo.country : 'AR' }), 1)
   }
   async trackEvent(eventName: string) {
     const key = `analytics:${getDate()}`

@@ -23,7 +23,7 @@ export default async function middleware(request: NextRequest) {
     console.error(e)
   }
 
-  response.cookies.set('id', id, { maxAge: 60 * 60 * 24, httpOnly: true, sameSite: 'lax' })
+  response.cookies.set('id', id, { maxAge: 60 * 60 * 12, httpOnly: true, sameSite: 'lax' })
   return response
 }
 
