@@ -115,13 +115,13 @@ export default function Dashboard() {
                   <TabPanel key={metric.name}>
                     <RankingList
                       title={`Top ${metric.name}`}
-                      metric={metric.name == 'Events' ? 'PAGES' : 'EVENTS'}
+                      metric={metric.name == 'Events' ? 'EVENTS' : 'VIEWS'}
                       items={metric.summary}
                     />
                   </TabPanel>
                 ))}
               </TabPanels>
-              <GeograficChart data={countrys} />
+              <GeograficChart data={data.length ? data[2].summary : []} />
             </Card>
           </TabPanels>
         </TabGroup>
@@ -131,10 +131,10 @@ export default function Dashboard() {
 }
 
 function getKPIs(data: TData) {
-  const kpis = { totalViews: 0, avgViews: 0, totalEvents: 0, avgEvents: 0, uniqueVisitors: 0 }
+  const kpis = { totalViews: 0, avgViews: 0, totalEvents: 0, avgEvents: 0, totalVisitors: 0 }
 
   if (data.length) {
-    const [pageviewsKPIs, eventsKPIs] = ['Pageviews', 'Events'].map((nameSpace) => {
+    const [pageviewsKPIs, eventsKPIs, visitorsKPI] = ['Pageviews', 'Events', 'Visitors'].map((nameSpace) => {
       const item = data.find((item) => item.name === nameSpace)
       if (!item) {
         return { total: 0, avg: 0 }
@@ -148,19 +148,19 @@ function getKPIs(data: TData) {
     kpis.avgViews = pageviewsKPIs.avg
     kpis.totalEvents = eventsKPIs.total
     kpis.avgEvents = eventsKPIs.avg
-    kpis.uniqueVisitors = Number(data.find((item) => item.name === 'Visitors')?.summary?.[0].total ?? 0)
+    kpis.totalVisitors = visitorsKPI.total
   }
 
   return [
     [
       { name: 'Total Pageviews', value: String(kpis.totalViews) },
       { name: 'Average Pageviews', value: String(kpis.avgViews.toFixed()) },
-      { name: 'Unique Visitors', value: String(kpis.uniqueVisitors) }
+      { name: 'Unique Visitors', value: String(kpis.totalVisitors) }
     ],
     [
       { name: 'Total Events', value: String(kpis.totalEvents) },
       { name: 'Average Events', value: String(kpis.avgEvents.toFixed()) },
-      { name: 'Unique Visitors', value: String(kpis.uniqueVisitors) }
+      { name: 'Unique Visitors', value: String(kpis.totalVisitors) }
     ]
   ]
 }

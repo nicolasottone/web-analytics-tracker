@@ -21,7 +21,7 @@ export default function RankingList({ title, metric, items, color }: RankingList
   })
   return (
     <>
-      <Card className="p-0 sm:mx-auto sm:max-w-3xl">
+      <Card className="p-0 sm:mx-auto sm:max-w-3xl xl:min-h-96">
         <div className="flex items-center justify-between border-b border-tremor-border p-6 dark:border-dark-tremor-border">
           <p className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">{title}</p>
           <p className="text-tremor-label font-medium uppercase text-tremor-content dark:text-dark-tremor-content">

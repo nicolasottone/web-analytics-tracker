@@ -16,7 +16,7 @@ const Chart = ({ data, categories, colors, valueFormatter }: ChartProps) => {
         index="date"
         categories={categories}
         colors={colors}
-        stack={true}
+        stack={data.length <= 7 ? false : true}
         showLegend={false}
         yAxisWidth={38}
         valueFormatter={valueFormatter}
@@ -29,7 +29,7 @@ const Chart = ({ data, categories, colors, valueFormatter }: ChartProps) => {
         index="date"
         categories={categories}
         colors={colors}
-        stack={true}
+        stack={data.length <= 7 ? false : true}
         showLegend={false}
         showYAxis={false}
         valueFormatter={valueFormatter}
