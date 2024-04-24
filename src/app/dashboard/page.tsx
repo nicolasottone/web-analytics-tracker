@@ -4,7 +4,7 @@ import GeograficChart from '@/components/geografic_chart'
 import KPICard from '@/components/kpicard'
 import RankingList from '@/components/ranking_list'
 import SettingNav from '@/components/settings_nav'
-import { valueFormatter } from '@/utils'
+import { getAverage, getTotal, valueFormatter } from '@/utils'
 import { Card, DateRangePickerValue, TabGroup, TabPanel, TabPanels, Divider } from '@tremor/react'
 import { subDays } from 'date-fns'
 import { useEffect, useState } from 'react'
@@ -21,39 +21,6 @@ type TData = {
     color?: string
   }[]
 }[]
-
-const countrys = [
-  {
-    name: 'Argentina',
-    total: 6730,
-    share: '32.1%',
-    color: 'bg-cyan-500'
-  },
-  {
-    name: 'USA',
-    total: 4120,
-    share: '19.6%',
-    color: 'bg-blue-500'
-  },
-  {
-    name: 'Germany',
-    total: 3920,
-    share: '18.6%',
-    color: 'bg-indigo-500'
-  },
-  {
-    name: 'French',
-    total: 3210,
-    share: '15.3%',
-    color: 'bg-violet-500'
-  },
-  {
-    name: 'Uruguay',
-    total: 3010,
-    share: '14.3%',
-    color: 'bg-fuchsia-500'
-  }
-]
 
 async function fetchData(from: Date, to: Date) {
   const response = await fetch('/api/analytics', {
@@ -131,36 +98,30 @@ export default function Dashboard() {
 }
 
 function getKPIs(data: TData) {
-  const kpis = { totalViews: 0, avgViews: 0, totalEvents: 0, avgEvents: 0, totalVisitors: 0 }
-
-  if (data.length) {
-    const [pageviewsKPIs, eventsKPIs, visitorsKPI] = ['Pageviews', 'Events', 'Visitors'].map((nameSpace) => {
-      const item = data.find((item) => item.name === nameSpace)
-      if (!item) {
-        return { total: 0, avg: 0 }
-      }
-      const total = item.summary.reduce((acc, cur) => acc + cur.total, 0)
-      const avg = Number(total / item.data.length)
-      return { total, avg }
-    })
-
-    kpis.totalViews = pageviewsKPIs.total
-    kpis.avgViews = pageviewsKPIs.avg
-    kpis.totalEvents = eventsKPIs.total
-    kpis.avgEvents = eventsKPIs.avg
-    kpis.totalVisitors = visitorsKPI.total
+  const kpis: Record<NameSpaces, { total: number; avg: number }> = {
+    Pageviews: { total: 0, avg: 0 },
+    Events: { total: 0, avg: 0 },
+    Visitors: { total: 0, avg: 0 }
   }
 
+  if (data.length) {
+    for (const item of data) {
+      kpis[item.name] = {
+        total: getTotal(item.summary),
+        avg: getAverage(item.summary, item.data.length)
+      }
+    }
+  }
   return [
     [
-      { name: 'Total Pageviews', value: String(kpis.totalViews) },
-      { name: 'Average Pageviews', value: String(kpis.avgViews.toFixed()) },
-      { name: 'Unique Visitors', value: String(kpis.totalVisitors) }
+      { name: 'Total Pageviews', value: String(kpis.Pageviews.total) },
+      { name: 'Average Pageviews per Day', value: String(kpis.Pageviews.avg.toFixed()) },
+      { name: 'Unique Visitors', value: String(kpis.Visitors.total) }
     ],
     [
-      { name: 'Total Events', value: String(kpis.totalEvents) },
-      { name: 'Average Events', value: String(kpis.avgEvents.toFixed()) },
-      { name: 'Unique Visitors', value: String(kpis.totalVisitors) }
+      { name: 'Total Events', value: String(kpis.Events.total) },
+      { name: 'Average Events per Day', value: String(kpis.Events.avg.toFixed()) },
+      { name: 'Unique Visitors', value: String(kpis.Visitors.total) }
     ]
   ]
 }

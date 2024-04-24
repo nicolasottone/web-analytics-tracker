@@ -9,3 +9,11 @@ export const getDate = (sub: number = 0) => {
   const date = subDays(new Date(), sub)
   return format(date, 'dd/MM/yyyy')
 }
+
+export function getTotal(data: { total: number }[]) {
+  return data.reduce((acc, cur) => acc + cur.total, 0)
+}
+
+export function getAverage(data: { total: number }[], length: number) {
+  return getTotal(data) / length
+}

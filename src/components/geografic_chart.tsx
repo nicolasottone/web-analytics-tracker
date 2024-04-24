@@ -1,5 +1,4 @@
-//'use client'
-import { classNames, valueFormatter } from '@/utils'
+import { getTotal, valueFormatter } from '@/utils'
 import { Card, DonutChart, List, ListItem } from '@tremor/react'
 import { ReactCountryFlag } from 'react-country-flag'
 
@@ -20,7 +19,7 @@ export default function GeograficChart({ data }: GeograficChartProps) {
     )
   }
 
-  const total = data.reduce((acc, cur) => acc + cur.total, 0)
+  const total = getTotal(data)
   const regionNamesInEnglish = new Intl.DisplayNames(['en'], { type: 'region' })
   const newData = data.map((country) => ({
     name: regionNamesInEnglish.of(country.name),
@@ -28,8 +27,6 @@ export default function GeograficChart({ data }: GeograficChartProps) {
     share: String(((country.total / total) * 100).toFixed(1)) + '%',
     code: country.name
   }))
-
-  console.log(newData)
 
   return (
     <>
