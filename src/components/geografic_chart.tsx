@@ -1,26 +1,45 @@
-// 'use client';
+//'use client'
 import { classNames, valueFormatter } from '@/utils'
 import { Card, DonutChart, List, ListItem } from '@tremor/react'
+import { ReactCountryFlag } from 'react-country-flag'
 
 interface GeograficChartProps {
   data: {
     name: string
     total: number
-    share: string
-    color: string
+    color?: string
   }[]
 }
 
 export default function GeograficChart({ data }: GeograficChartProps) {
+  if (!data.length) {
+    return (
+      <Card className="sm:mx-auto max-w-3xl xl:max-w-lg xl:min-h-96">
+        <p>Loading data</p>
+      </Card>
+    )
+  }
+
+  const total = data.reduce((acc, cur) => acc + cur.total, 0)
+  const regionNamesInEnglish = new Intl.DisplayNames(['en'], { type: 'region' })
+  const newData = data.map((country) => ({
+    name: regionNamesInEnglish.of(country.name),
+    total: country.total,
+    share: String(((country.total / total) * 100).toFixed(1)) + '%',
+    code: country.name
+  }))
+
+  console.log(newData)
+
   return (
     <>
-      <Card className="sm:mx-auto max-w-3xl xl:max-w-lg">
+      <Card className="sm:mx-auto max-w-3xl xl:max-w-lg xl:min-h-96">
         <h3 className="text-tremor-default font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
           Total visits by country
         </h3>
         <DonutChart
           className="mt-8"
-          data={data}
+          data={newData}
           category="total"
           index="name"
           valueFormatter={valueFormatter}
@@ -33,10 +52,10 @@ export default function GeograficChart({ data }: GeograficChartProps) {
           <span>Amount / Share</span>
         </p>
         <List className="mt-2">
-          {data.map((item) => (
+          {newData.map((item) => (
             <ListItem key={item.name} className="space-x-6">
               <div className="flex items-center space-x-2.5 truncate">
-                <span className={classNames(item.color, 'h-2.5 w-2.5 shrink-0 rounded-sm')} aria-hidden={true} />
+                <ReactCountryFlag className="text-xl " svg countryCode={item.code} />
                 <span className="truncate dark:text-dark-tremor-content-emphasis">{item.name}</span>
               </div>
               <div className="flex items-center space-x-2">
