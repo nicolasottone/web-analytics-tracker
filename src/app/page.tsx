@@ -1,28 +1,36 @@
-import { Button, Card, Divider, Title } from '@tremor/react'
+import { classNames } from '@/utils'
+import { Button, Callout, Card, Divider, Title } from '@tremor/react'
 import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className="container mx-auto my-20">
-      <Card className="flex flex-col gap-5">
-        <Title>HomePage</Title>
-        <h2 className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-          Testing buttons to track analytics
-        </h2>
-        <Divider />
-        <div className="flex justify-around">
-          <Link href={'/contact'}>
-            <Button variant="secondary">Go to /contact</Button>
-          </Link>
-
-          <Link href={'/pricing'}>
-            <Button variant="secondary">Go to /pricing</Button>
-          </Link>
-          <Link href={'/dashboard'}>
-            <Button variant="primary">Go to /dashboard</Button>
-          </Link>
+    <main className="container flex justify-center mx-auto my-8 xl:my-20">
+      <div className="flex flex-col xl:flex-row gap-12 xl:justify-between mx-auto p-8">
+        <div className="relative flex flex-col gap-4 max-w-2xl">
+          <h1
+            className={classNames(
+              'text-5xl tremor-content-strong font-extrabold md:text-6xl lg:text-5xl text-zinc-900'
+            )}
+          >
+            Website Analytics Tracker
+          </h1>
+          <p className="max-w-prose text-zinc-600 font-normal sm:text-lg">
+            Gain insights into your website traffic, visitor demographics, and track custom events.
+          </p>{' '}
+          {/* Rephrased for better clarity and flow */}
+          <div className="mt-5">
+            <Link href="/dashboard">
+              <Button variant="primary">Access Dashboard</Button>
+            </Link>
+          </div>
         </div>
-      </Card>
+        <div>
+          <Callout title="Disclaimer" color="teal" className="xl:max-w-md max-h-fit">
+            This website is a demonstration of analytics capabilities. Functionality beyond the dashboard is not
+            implemented. Feel free to explore and interact to see the results reflected in the dashboard.
+          </Callout>
+        </div>
+      </div>
     </main>
   )
 }
