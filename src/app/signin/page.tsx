@@ -1,3 +1,5 @@
+'use client'
+import { trackEvent } from '@/utils/client_api'
 import { Divider, TextInput } from '@tremor/react'
 
 const GoogleIcon = (props: any) => (
@@ -6,7 +8,7 @@ const GoogleIcon = (props: any) => (
   </svg>
 )
 
-export default function Example() {
+export default function SignInPage() {
   return (
     <div className="container mx-auto md:my-20">
       <div className="flex min-h-full flex-1 flex-col justify-center px-4 py-10 lg:px-6">
@@ -45,6 +47,7 @@ export default function Example() {
             />
             <button
               type="submit"
+              onClick={() => trackEvent('Sign in')}
               className="mt-4 w-full whitespace-nowrap rounded-tremor-default bg-tremor-brand py-2 text-center text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis"
             >
               Sign in
@@ -53,6 +56,7 @@ export default function Example() {
           <Divider>or with</Divider>
           <a
             href="#"
+            onClick={() => trackEvent('Sign in with Google')}
             className="inline-flex w-full items-center justify-center space-x-2 rounded-tremor-default border border-tremor-border bg-tremor-background py-2 text-tremor-content-strong shadow-tremor-input hover:bg-tremor-background-subtle dark:border-dark-tremor-border dark:bg-dark-tremor-background dark:text-dark-tremor-content-strong dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-background-subtle"
           >
             <GoogleIcon className="h-5 w-5" aria-hidden={true} />

@@ -1,3 +1,5 @@
+'use client'
+import { trackEvent } from '@/utils/client_api'
 import { RiCheckboxCircleFill } from '@remixicon/react'
 import { Card, Divider, List, ListItem } from '@tremor/react'
 
@@ -40,9 +42,13 @@ export default function PricingPage() {
             <div className="mt-8 space-y-6">
               <div className="relative border-l-2 border-tremor-border pl-4 dark:border-dark-tremor-border">
                 <h4 className="text-tremor-default font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                  <a href="#" className="focus:outline-none">
+                  <a href="/contact" className="focus:outline-none">
                     {/* Extend link to entire card */}
-                    <span className="absolute inset-0" aria-hidden={true} />
+                    <span
+                      className="absolute inset-0"
+                      aria-hidden={true}
+                      onClick={() => trackEvent('Schedule button')}
+                    />
                     Talk to Sales &#8594;
                   </a>
                 </h4>
@@ -54,7 +60,11 @@ export default function PricingPage() {
                 <h4 className="text-tremor-default font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
                   <a href="#" className="focus:outline-none">
                     {/* Extend link to entire card */}
-                    <span className="absolute inset-0" aria-hidden={true} />
+                    <span
+                      className="absolute inset-0"
+                      aria-hidden={true}
+                      onClick={() => trackEvent('Get Demo button')}
+                    />
                     Book a demo &#8594;
                   </a>
                 </h4>
@@ -90,6 +100,7 @@ export default function PricingPage() {
             <Divider />
             <a
               href="#"
+              onClick={() => trackEvent('Upgrade button')}
               className="block w-full whitespace-nowrap rounded-tremor-small bg-tremor-brand py-2.5 text-center text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis"
             >
               Upgrade

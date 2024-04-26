@@ -1,6 +1,8 @@
+'use client'
+import { trackEvent } from '@/utils/client_api'
 import { Card, Divider, Tab, TabGroup, TabList, TextInput } from '@tremor/react'
 
-export default function Example() {
+export default function SettingsPage() {
   return (
     <div className="container mx-auto md:my-20">
       <Card>
@@ -37,10 +39,12 @@ export default function Example() {
                     name="email"
                     placeholder="john@company.com"
                     className="mt-2 w-full rounded-tremor-small sm:max-w-lg"
+                    required
                   />
                 </div>
                 <button
                   type="submit"
+                  onClick={() => trackEvent('Update email')}
                   className="mt-6 whitespace-nowrap rounded-tremor-small bg-tremor-brand px-4 py-2.5 text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis"
                 >
                   Update email
@@ -68,6 +72,7 @@ export default function Example() {
                   name="current-password"
                   placeholder=""
                   className="mt-2 w-full rounded-tremor-small sm:max-w-lg"
+                  required
                 />
               </div>
               <div className="mt-4">
@@ -83,10 +88,12 @@ export default function Example() {
                   name="new-password"
                   placeholder=""
                   className="mt-2 w-full rounded-tremor-small sm:max-w-lg"
+                  required
                 />
               </div>
               <button
                 type="submit"
+                onClick={() => trackEvent('Update password')}
                 className="mt-6 whitespace-nowrap rounded-tremor-small bg-tremor-brand px-4 py-2.5 text-tremor-default font-medium text-tremor-brand-inverted shadow-tremor-input hover:bg-tremor-brand-emphasis dark:bg-dark-tremor-brand dark:text-dark-tremor-brand-inverted dark:shadow-dark-tremor-input dark:hover:bg-dark-tremor-brand-emphasis"
               >
                 Update password

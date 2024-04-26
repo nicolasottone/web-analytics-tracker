@@ -1,8 +1,11 @@
+'use client'
 import { classNames } from '@/utils'
+import { trackEvent } from '@/utils/client_api'
 import { Button, Callout, Card, Divider, Title } from '@tremor/react'
 import Link from 'next/link'
 
 export default function Home() {
+
   return (
     <main className="container flex justify-center mx-auto my-8 xl:my-20">
       <div className="flex flex-col xl:flex-row gap-12 xl:justify-between mx-auto p-8">
@@ -20,7 +23,9 @@ export default function Home() {
           {/* Rephrased for better clarity and flow */}
           <div className="mt-5">
             <Link href="/dashboard">
-              <Button variant="primary">Access Dashboard</Button>
+              <Button variant="primary" onClick={() => trackEvent('Hero button')}>
+                Access Dashboard
+              </Button>
             </Link>
           </div>
         </div>

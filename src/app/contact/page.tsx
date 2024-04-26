@@ -1,6 +1,8 @@
+'use client'
+import { trackEvent } from '@/utils/client_api'
 import { Card, Divider, TextInput } from '@tremor/react'
 
-export default function Contact() {
+export default function ContactPage() {
   return (
     <div className="container mx-auto md:my-20">
       <Card className="sm:mx-auto sm:max-w-2xl">
@@ -10,7 +12,7 @@ export default function Contact() {
         <p className="mt-1 text-tremor-default leading-6 text-tremor-content dark:text-dark-tremor-content">
           Take a few moments to register for your company`&apos`s workspace
         </p>
-        <form action="#" method="post" className="mt-8">
+        <form action={() => trackEvent('Send form')} method="post" className="mt-8">
           <div className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
             <div className="col-span-full sm:col-span-3">
               <label
