@@ -1,6 +1,10 @@
-# "Web Analytics Tracker: Analytics for Applications made in Next js"
+# Web Analytics Tracker: Analytics for Applications made in Next js
 
-![Project Video](https://raw.githubusercontent.com/nicolasottone/web-analytics-tracker/7a1598fd08063ab0d26c1fd92c714ce3f325762b/public/video/democlip2.mp4)
+
+
+https://github.com/nicolasottone/web-analytics-tracker/assets/64184394/c6d079db-27e0-4050-9726-1f8943c608cd
+
+
 
 ## Summary
 
@@ -36,23 +40,23 @@ analytics.trackVisitor(metadata)
 
 ## Features
 
-- **Customizable Event Tracking:** Define and track specific user interactions with server-side actions, gaining granular insights into user behavior.
-- **Page View Monitoring:** Monitor page views through middleware, capturing valuable data on user navigation and popular content.
-- **Unique Visitor Identification:** Employ temporary cookies to identify and count unique visitors, providing an accurate measure of your website's reach.
-- **Real-time Analytics Dashboard:** Visualize key metrics like page views, events, and visitor demographics through dynamic charts, graphs, and lists.
-- **Date Range Filtering:** Analyze data within specific timeframes using a user-friendly date range picker.
-- **Smooth Animations:** Enjoy a visually pleasing experience with seamless transitions and animations.
-- **Dynamic Interface:** Interact with a responsive and adaptable interface that caters to your analytical needs.
-- **Low Response Times:** Experience lightning-fast data retrieval and dashboard updates thanks to Redis integration.
+*   **🎯 Customizable Event Tracking:** Define and track specific user interactions with server-side actions, gaining granular insights into user behavior.
+*   **📈 Page View Monitoring:** Monitor page views through middleware, capturing valuable data on user navigation and popular content.
+*   **🔍 Unique Visitor Identification:** Employ temporary cookies to identify and count unique visitors, providing an accurate measure of your website's reach.
+*   **📊 Real-time Analytics Dashboard:** Visualize key metrics like page views, events, and visitor demographics through dynamic charts, graphs, and lists.
+*   **📅 Date Range Filtering:** Analyze data within specific timeframes using a user-friendly date range picker.
+*   **✨ Smooth Animations:** Enjoy a visually pleasing experience with seamless transitions and animations.
+*   **📱 Dynamic Interface:** Interact with a responsive and adaptable interface that caters to your analytical needs.
+*   **⚡ Low Response Times:** Experience lightning-fast data retrieval and dashboard updates thanks to Redis integration.
 
 ## Stack
 
-- **Next.js 14**
-- **React.js**
-- **TypeScript**
-- **Tailwind CSS**
-- **Tremor UI**
-- **Redis**
+*   **🚀 Next.js 14**
+*   **⚛️ React.js**
+*   **⌨️ TypeScript**
+*   **🎨 Tailwind CSS**
+*   **🧰 Tremor UI**
+*   **💾 Redis**
 
 ## Getting Started
 
