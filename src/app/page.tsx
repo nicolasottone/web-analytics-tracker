@@ -3,11 +3,11 @@ import { classNames } from '@/utils'
 import { trackEvent } from '@/utils/client_api'
 import { Button, Callout, Card, Divider, Title } from '@tremor/react'
 import Link from 'next/link'
+import VideoPlayer from '@/components/video_player'
 
 export default function Home() {
-
   return (
-    <main className="container flex justify-center mx-auto my-8 xl:my-20">
+    <main className="container flex flex-col items-center justify-center mx-auto md:my-4 lg:my-8 xl:pb-20">
       <div className="flex flex-col xl:flex-row gap-12 xl:justify-between mx-auto p-8">
         <div className="relative flex flex-col gap-4 max-w-2xl">
           <h1
@@ -36,6 +36,7 @@ export default function Home() {
           </Callout>
         </div>
       </div>
+      <VideoPlayer />
     </main>
   )
 }

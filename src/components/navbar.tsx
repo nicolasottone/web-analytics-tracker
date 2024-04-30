@@ -16,7 +16,7 @@ export const NavBar = () => {
       <nav className="relative bg-white">
         <div className="border-b border-gray-200">
           <div className="flex container mx-auto h-16 text-tremor-content-strong dark:text-dark-tremor-content-strong items-center justify-between">
-            <div className="ml-4 flex lg:ml-0">
+            <div className="ml-4 flex">
               <Link href="/">
                 <span>HomePage</span> {/* Envuelve el texto en un elemento para el enlace */}
               </Link>
